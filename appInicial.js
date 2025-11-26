@@ -2,14 +2,14 @@
 
 // ====== Estado global (configuración de la tabla) ======
 // Usamos var a propósito (forma "vieja" de declarar variables)
-const ESTADO_GLOBAL = {
+var ESTADO_GLOBAL = {
   pagina: 1, // página actual
   porPagina: 7, // cuántos registros mostrar por página
   busqueda: "", // texto de búsqueda (filtro)
   orden: "createdAt-desc", // criterio de ordenamiento por defecto
 };
 
-let ULTIMA_EXPORTACION = null; // guarda la marca de tiempo del último export (casi no se usa)
+var ULTIMA_EXPORTACION = null; // guarda la marca de tiempo del último export (casi no se usa)
 
 // ====== Utilidades generales ======
 
@@ -36,8 +36,8 @@ function formatearDinero2(numero) {
 
 // Suma todos los elementos de un arreglo (no se usa, pero la dejo comentada)
 function sumar1(arreglo) {
-  let total = 0;
-  for (let i = 0; i < arreglo.length; i++) {
+  var total = 0;
+  for (var i = 0; i < arreglo.length; i++) {
     total += arreglo[i];
   }
   return total;
@@ -178,8 +178,9 @@ function renderizar() {
   var criterioOrden = ESTADO_GLOBAL.orden || "createdAt-desc";
 
   // 4. Filtrado manual de productos
-  const productosFiltrados = [];
-  for (const producto of productos) {
+  var productosFiltrados = [];
+  for (var i = 0; i < productos.length; i++) {
+    var producto = productos[i];
     var pasaFiltro = true;
 
     if (textoBusqueda) {

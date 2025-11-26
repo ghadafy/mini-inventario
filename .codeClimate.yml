@@ -1,0 +1,99 @@
+# ============================
+#  PLANTILLA GENERAL CODECLIMATE
+#  (se puede reutilizarla en otros repos)
+# ============================
+version: "2"
+
+# ------------------------------------
+# 1. REGLAS GENERALES DE MANTENIBILIDAD
+# ------------------------------------
+checks:
+  argument-count:
+    enabled: true
+    config:
+      threshold: 4 # Máx. 4 parámetros por función
+
+  method-complexity:
+    enabled: true
+    config:
+      threshold: 10 # Complejidad máxima de una función
+
+  method-lines:
+    enabled: true
+    config:
+      threshold: 40 # Máx. líneas por función
+
+  file-lines:
+    enabled: true
+    config:
+      threshold: 350 # Máx. líneas por archivo (tu app.js cabe bien)
+
+  nested-control-flow:
+    enabled: true
+    config:
+      threshold: 4 # Niveles máximos de if/for anidados
+
+  return-statements:
+    enabled: true
+    config:
+      threshold: 4 # Máx. returns por función
+
+  similar-code:
+    enabled: true # Marca bloques parecidos
+
+  identical-code:
+    enabled: true # Marca bloques exactamente iguales
+
+# ------------------------------------
+# 2. PLUGINS POR TECNOLOGÍA
+# ------------------------------------
+plugins:
+  # --- JavaScript ---
+  eslint:
+    enabled: true
+    channel: eslint-8
+    config:
+      extensions:
+        - ".js"
+        # - ".mjs"      # Descomenta si usas módulos
+        # - ".jsx"      # Descomenta si usas React
+
+    exclude_patterns:
+      - "node_modules/"
+      - "dist/"
+      - "build/"
+
+  # --- CSS ---
+  stylelint:
+    enabled: true
+    config:
+      extensions:
+        - ".css"
+        # - ".scss"     # Descomenta si usas SCSS
+
+  # --- Duplicación de código (muy útil en este demo) ---
+  duplication:
+    enabled: true
+    config:
+      languages:
+        javascript:
+          mass_threshold: 40 # Sensibilidad de duplicación JS
+        css:
+          mass_threshold: 40 # Duplicación en CSS
+
+# ------------------------------------
+# 3. COSAS QUE NO QUIERES ANALIZAR
+# ------------------------------------
+exclude_patterns:
+  - "node_modules/"
+  - "vendor/"
+  - "dist/"
+  - "build/"
+  - "coverage/"
+  - "logs/"
+  - "tests/"
+  - "**/*.min.js"
+  - "**/*.min.css"
+  # Si en otro proyecto usas /public o /assets enormes, puedes agregarlos:
+  # - "public/"
+  # - "assets/vendor/"
